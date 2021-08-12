@@ -1,0 +1,20 @@
+{
+  "scripts": {
+    "asbuild:untouched": "asc assembly/index.ts -b dist/untouched.wasm -t dist/untouched.wat --sourceMap --debug --exportRuntime",
+    "asbuild:optimized": "asc assembly/index.ts -b dist/optimized.wasm -t dist/optimized.wat -Ospeed --optimizeLevel 3 --exportRuntime --noAssert",
+    "asbuild": "npm run asbuild:untouched && npm run asbuild:optimized",
+    "hello": "npm run asbuild && parcel src/index.html"
+  },
+  "devDependencies": {
+    "assemblyscript": "0.19.9",
+    "parcel": "^1.12.4",
+    "parcel-bundler": "^1.12.3",
+    "typescript": "^3.7.5"
+  },
+  "dependencies": {
+    "@assemblyscript/loader": "^0.19.9"
+  },
+  "browserslist": [
+    "last 1 Chrome version"
+  ]
+}
