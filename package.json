@@ -1,20 +1,27 @@
 {
+  "name": "sandbox",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
   "scripts": {
-    "asbuild:untouched": "asc assembly/index.ts -b dist/untouched.wasm -t dist/untouched.wat --sourceMap --debug --exportRuntime",
-    "asbuild:optimized": "asc assembly/index.ts -b dist/optimized.wasm -t dist/optimized.wat -Ospeed --optimizeLevel 3 --exportRuntime --noAssert",
-    "asbuild": "npm run asbuild:untouched && npm run asbuild:optimized",
-    "hello": "npm run asbuild && parcel src/index.html"
+    "asbuild:debug": "asc assembly/index.ts --target debug",
+    "asbuild:release": "asc assembly/index.ts --target release",
+    "asbuild": "npm run asbuild:debug && npm run asbuild:release",
+    "start": "npx serve .",
+    "start-all": "cp build/*.map dist/ && cp build/*.wasm dist/ && parcel ./index.ts.html"
   },
+  "author": "",
+  "license": "ISC",
   "devDependencies": {
-    "assemblyscript": "0.19.9",
-    "parcel": "^1.12.4",
-    "parcel-bundler": "^1.12.3",
-    "typescript": "^3.7.5"
+    "assemblyscript": "^0.20.3",
+    "parcel": "^2.4.1",
+    "typescript": "^4.6.3"
   },
-  "dependencies": {
-    "@assemblyscript/loader": "^0.19.9"
-  },
-  "browserslist": [
-    "last 1 Chrome version"
-  ]
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./build/release.js",
+      "types": "./build/release.d.ts"
+    }
+  }
 }
