@@ -17,6 +17,7 @@
     }
   },
   "options": {
-    "bindings": "raw"
+    "bindings": "raw",
+    "exportRuntime" : true
   }
 }
