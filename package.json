@@ -1,0 +1,29 @@
+{
+  "name": "sandbox",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "asbuild:debug": "asc assembly/index.ts --target debug",
+    "asbuild:release": "asc assembly/index.ts --target release",
+    "asbuild": "npm run asbuild:debug && npm run asbuild:release",
+    "start": "npx serve .",
+    "start-all": "cp build/*.map dist/ && cp build/*.wasm dist/ && parcel ./index.ts.html",
+    "deploy": "gh-pages -d ."
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "assemblyscript": "^0.20.3",
+    "gh-pages": "^3.2.3",
+    "parcel": "^2.4.1",
+    "typescript": "^4.6.3"
+  },
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./build/release.js",
+      "types": "./build/release.d.ts"
+    }
+  }
+}
